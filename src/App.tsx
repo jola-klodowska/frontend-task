@@ -1,11 +1,15 @@
 import React from 'react';
-import './App.css';
-import Container from './components/Container/Container';
+import Colors from './components/Colors/Colors';
+import Filter from './components/Filter/Filter';
+import FormAdd from './components/FormAdd/FormAdd';
 
 const App = () => {
   return (
-    <Container>
-    </Container>
+    <main>
+      <FormAdd />
+      <Filter />
+      <Colors />
+    </main>
   );
 };
 
