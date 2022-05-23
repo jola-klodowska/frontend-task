@@ -1,9 +1,19 @@
 import React from 'react';
-import './Colors.scss';
+import Color from '../Color/Color';
 
-const Colors = () => {
+
+interface Test {
+
+}
+
+const Colors = (props: Test) => {
     return (
-        <div></div>
+        <article>
+            <h2>Yours colors</h2>
+            <div>
+                <Color/>
+            </div>
+        </article>
     );
 };
 

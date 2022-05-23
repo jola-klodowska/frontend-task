@@ -1,8 +1,14 @@
-import './Color.scss';
+import styles from './Color.scss';
 
-const Color = () => {
+interface Test {
+
+}
+
+const Color = (props:Test) => {
     return (
-        <div></div>
+        <div>
+            <div className={styles.rectangle}>jajajajajaaj</div>
+        </div>
     );
 };
 

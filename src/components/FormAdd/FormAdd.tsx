@@ -3,7 +3,9 @@ import './FormAdd.scss';
 
 const FormAdd = () => {
     return (
-        <div></div>
+        <form>
+
+        </form> 
     );
 };
 
