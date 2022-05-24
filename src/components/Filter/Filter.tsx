@@ -1,9 +1,9 @@
 import React from 'react';
-import './Filter.module.scss';
+import styles from './Filter.module.scss';
 
 const Filter = () => {
     return (
-        <form>
+        <form className={styles.form}>
             <input type="text" /><br/>
             <button>Search</button>
         </form>

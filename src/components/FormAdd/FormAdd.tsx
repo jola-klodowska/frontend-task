@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { MyColor } from '../../App';
-import './FormAdd.module.scss';
+import styles from './FormAdd.module.scss';
+import shortid from 'shortid';
 
 export interface Colors {
     colors: MyColor[]
@@ -13,20 +14,16 @@ const FormAdd = (props: Colors) => {
     const handleSubmit = (e: any) => {
         e.preventDefault();
         const colorObject = {
-            name: colorName
+            name: colorName,
+            id: shortid()
         }
         const colors = props.colors;
-        colors.push(colorObject)
+        colors.push(colorObject);
         window.localStorage.setItem('myColors', JSON.stringify(colors));
-        console.log(colors)
-        
-
-        //customColors.push(colorObject)
-       // window.localStorage.setItem('myColors', JSON.stringify(customColors));
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className={styles.form} onSubmit={handleSubmit}>
             <label>Please write color in HEX RGB form</label><br />
             <input type="text" onChange={e => setColorName(e.target.value)} /><br />
             <button>Add color</button>
@@ -35,3 +32,5 @@ const FormAdd = (props: Colors) => {
 };
 
 export default FormAdd;
+
+

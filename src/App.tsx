@@ -6,21 +6,26 @@ import FormAdd from './components/FormAdd/FormAdd';
 
 export interface MyColor {
   name: string;
+  id: string;
 }
 
 const App = () => {
+
+  let defaultColors: MyColor[] = [
+    {
+      id: '1',
+      name: '#FF0000'
+    },
+    {
+      id: '2',
+      name: '#00FF00'
+    },
+    {
+      id: '3',
+      name: '#0000FF'
+    }
+  ];
   const colors = () => {
-    let defaultColors: MyColor[] = [
-      {
-        name: '#FF0000'
-      },
-      {
-        name: '#00FF00'
-      },
-      {
-        name: '#0000FF'
-      }
-    ];
 
     let allColors = defaultColors;
 
