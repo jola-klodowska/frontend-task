@@ -1,9 +1,12 @@
 import React from 'react';
-import './Filter.scss';
+import './Filter.module.scss';
 
 const Filter = () => {
     return (
-        <div></div>
+        <form>
+            <input type="text" /><br/>
+            <button>Search</button>
+        </form>
     );
 };
 
