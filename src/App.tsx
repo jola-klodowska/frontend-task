@@ -2,55 +2,50 @@ import React from 'react';
 import Colors from './components/Colors/Colors';
 import Filter from './components/Filter/Filter';
 import FormAdd from './components/FormAdd/FormAdd';
+import ColorInformation from './types/color-information';
+import { SearchFilter } from './types/search-filter';
 
-
-export interface MyColor {
-  name: string;
-  red: number;
-  green: number;
-  blue: number;
-  isDefault: boolean;
-}
 
 const App = () => {
 
-  const defaultColors: MyColor[] = [
+  const defaultColors: ColorInformation[] = [
     {
       name: '#FF0000',
-      red: 255,
-      green: 0,
-      blue: 0,
+      components: [255,0,0],
       isDefault: true
     },
     {
       name: '#00FF00',
-      red: 0,
-      green: 255,
-      blue: 0,
+      components: [0,255,0],
       isDefault: true
     },
     {
       name: '#0000FF',
-      red: 0,
-      green: 0,
-      blue: 255,
+      components: [0,0,255],
       isDefault: true
     }
   ];
-  // TODO napraw to
+
   let customColors = (() => {
     let savedColors = window.localStorage.getItem('myColors');
 
-    let result: MyColor[] = [];
+    let result: ColorInformation[] = [];
     if (savedColors != null) {
       result = JSON.parse(savedColors);
     }
     return result;
   })();
 
-  let allColors = [...defaultColors, ...customColors]
+  let allColors = [...defaultColors, ...customColors];
 
-  const addNewCustomColor = (color: MyColor) => {
+  const addNewCustomColor = (color: ColorInformation) => {
+    const isAlreadyInList = customColors.map(x => x.name).some(x => x === color.name);
+
+    if (isAlreadyInList) {
+      alert("Color already on the list");
+      return;
+    }
+
     customColors.push(color);
     saveCustomColorList();
   }
@@ -64,12 +59,19 @@ const App = () => {
     window.localStorage.setItem('myColors', JSON.stringify(customColors));
   }
 
+  let allFilters: SearchFilter[] = [];
+
+  const addFilter = (newFilter: SearchFilter) => {
+    console.log(newFilter)
+    allFilters.push(newFilter);
+  }
+
   return (
-    <main>
+    <>
       <FormAdd onColorAdd={addNewCustomColor} />
-      <Filter />
-      <Colors colors={allColors} onColorRemove={removeColor} />
-    </main>
+      <Filter onFilterAdd={addFilter} />
+      <Colors colors={allColors} filters={allFilters} onColorRemove={removeColor} />
+    </>
   );
 };
 

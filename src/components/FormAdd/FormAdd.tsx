@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MyColor } from '../../App';
+import ColorInformation from '../../types/color-information';
 import Button from '../Button/Button';
 import styles from './FormAdd.module.scss';
 
@@ -22,11 +22,9 @@ const FormAdd = (props: Colors) => {
             colorValue = colorName.substring(1);
         }
 
-        const colorObject: MyColor = {
+        const colorObject: ColorInformation = {
             name: `#${colorValue}`,
-            red: parseInt(colorValue.substring(0,2), 16),
-            green: parseInt(colorValue.substring(2,4), 16), 
-            blue: parseInt(colorValue.substring(4,6), 16),
+            components: [parseInt(colorValue.substring(0,2), 16),parseInt(colorValue.substring(2,4), 16),parseInt(colorValue.substring(4,6), 16)  ],
             isDefault: false
         }
         props.onColorAdd(colorObject);

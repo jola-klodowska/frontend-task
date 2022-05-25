@@ -1,12 +1,11 @@
 import React from 'react';
 import styles from './Button.module.scss';
 
-interface Test {
-
+interface IButtonProps {
     children: React.ReactNode;
 }
 
-const Button = (props: Test) => {
+const Button = (props: IButtonProps) => {
     return (
         <button className={styles.button}>{props.children}</button>
     );

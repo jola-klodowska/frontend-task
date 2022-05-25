@@ -1,19 +1,20 @@
 import clsx from 'clsx';
+import React from 'react';
 import styles from './Color.module.scss';
 
-interface Test {
+interface IColorProps {
     color: string;
     isDefault: boolean;
-    onColorRemove: (colorId:string) => void;
+    onColorRemove: (colorId: string) => void;
 }
 
-const Color = (props: Test) => {
+const Color = (props: IColorProps) => {
 
     const colorName = props.color.toUpperCase()
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-        props.onColorRemove(props.color);       
+        props.onColorRemove(props.color);
     }
 
     return (

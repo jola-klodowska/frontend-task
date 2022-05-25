@@ -1,21 +1,43 @@
 import React from 'react';
 import shortid from 'shortid';
-import { MyColor } from '../../App';
+import ColorInformation from '../../types/color-information';
+import { SearchFilter } from '../../types/search-filter';
 import Color from '../Color/Color';
 import styles from './Colors.module.scss';
 
-interface Test {
-    colors: MyColor[];
+interface IColorsProps {
+    colors: ColorInformation[];
+    filters: SearchFilter[];
     onColorRemove: (colorId: string) => void;
 }
 
-const Colors = (props: Test) => {
+const Colors = (props: IColorsProps) => {
+    /* TODO: filters logic
+    const operations = {
+        (FilterOperator.Equals as string): (colorValue: number, filterValue: number): boolean => colorValue === filterValue,
+        "!=": (colorValue: number, filterValue: number): boolean => colorValue !== filterValue,
+        ">=": (colorValue: number, filterValue: number): boolean => colorValue >= filterValue,
+        ">": (colorValue: number, filterValue: number): boolean => colorValue > filterValue,
+        "<=": (colorValue: number, filterValue: number): boolean => colorValue <= filterValue,
+        "<": (colorValue: number, filterValue: number): boolean => colorValue < filterValue,
+    }*/
 
-    const colors = props.colors;
-colors.sort(
-        (colorA, colorB) => colorB.red - colorA.red ||
-            colorB.green - colorA.green ||
-            colorB.blue - colorA.blue
+    let colors = props.colors;
+
+    for (let filter of props.filters) {
+        colors = colors.filter(x => {
+            const colorValue = x.components[filter.field];
+            const filterValue = filter.value;
+            let operation = colorValue === filterValue;
+
+            return operation;
+        });
+    }
+
+    colors.sort(
+        (colorA, colorB) => colorB.components[0] - colorA.components[0] ||
+            colorB.components[1] - colorA.components[1] ||
+            colorB.components[2] - colorA.components[2]
     )
 
     return (
