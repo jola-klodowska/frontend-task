@@ -5,10 +5,19 @@
     width: 150px;
     border-radius: 8px;
     margin: 15px;
+
+    &:hover {
+        border: #fff solid 2px;
+    }
 }
 
 .delete {
     cursor: pointer;
+
+    &:hover {
+        color: #ff6666;
+        font-weight: bold;
+    }
 }
 
 .noActive {
