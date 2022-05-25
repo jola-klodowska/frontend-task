@@ -5,9 +5,11 @@ import styles from './Colors.module.scss';
 
 interface Test {
     colors: MyColor[];
+    onColorRemove: (colorId: string) => void;
 }
 
 const Colors = (props: Test) => {
+
     const colors = props.colors;
 
     return (
@@ -16,6 +18,7 @@ const Colors = (props: Test) => {
             <div className={styles.colorContainer}>
                 {colors.map(color =>
                     <Color
+                        onColorRemove={props.onColorRemove}
                         key={color.id}
                         id={color.id}
                         color={color.name} />

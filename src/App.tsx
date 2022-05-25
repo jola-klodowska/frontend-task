@@ -11,7 +11,7 @@ export interface MyColor {
 
 const App = () => {
 
-  let defaultColors: MyColor[] = [
+  const defaultColors: MyColor[] = [
     {
       id: '1',
       name: '#FF0000'
@@ -25,27 +25,38 @@ const App = () => {
       name: '#0000FF'
     }
   ];
-  const colors = () => {
-
-    let allColors = defaultColors;
-
+  // TODO napraw to
+  let customColors = (() => {
     let savedColors = window.localStorage.getItem('myColors');
 
-    let customColors: MyColor[] = [];
+    let result: MyColor[] = [];
     if (savedColors != null) {
-      customColors = JSON.parse(savedColors);
-      allColors = [...customColors];
+      result = JSON.parse(savedColors);
     }
+    return result;
+  })();
 
-    return allColors;
+  let allColors = [...defaultColors, ...customColors]
+
+  const addNewCustomColor = (color: MyColor) => {
+    customColors.push(color);
+    saveCustomColorList();
   }
 
+  const removeColor = (colorId: string) => {
+    customColors = customColors.filter(x => x.id !== colorId);
+    saveCustomColorList();
+  }
+
+  const saveCustomColorList = () => {
+    window.localStorage.setItem('myColors', JSON.stringify(customColors));
+  }
 
   return (
     <main>
-      <FormAdd colors={colors()}/>
+      <FormAdd onColorAdd={addNewCustomColor} />
       <Filter />
-      <Colors colors={colors()}/>
+      <Colors colors={allColors} onColorRemove={removeColor} />
     </main>
   );
 };
