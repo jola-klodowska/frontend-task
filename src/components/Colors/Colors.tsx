@@ -1,4 +1,5 @@
 import React from 'react';
+import shortid from 'shortid';
 import { MyColor } from '../../App';
 import Color from '../Color/Color';
 import styles from './Colors.module.scss';
@@ -19,9 +20,9 @@ const Colors = (props: Test) => {
                 {colors.map(color =>
                     <Color
                         onColorRemove={props.onColorRemove}
-                        key={color.id}
-                        id={color.id}
-                        color={color.name} />
+                        key={shortid()}
+                        color={color.name} 
+                        isDefault={color.isDefault}/>
                 )}
             </div>
         </article>

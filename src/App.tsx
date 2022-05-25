@@ -6,23 +6,35 @@ import FormAdd from './components/FormAdd/FormAdd';
 
 export interface MyColor {
   name: string;
-  id: string;
+  red: number;
+  green: number;
+  blue: number;
+  isDefault: boolean;
 }
 
 const App = () => {
 
   const defaultColors: MyColor[] = [
     {
-      id: '1',
-      name: '#FF0000'
+      name: '#FF0000',
+      red: 255,
+      green: 0,
+      blue: 0,
+      isDefault: true
     },
     {
-      id: '2',
-      name: '#00FF00'
+      name: '#00FF00',
+      red: 0,
+      green: 255,
+      blue: 0,
+      isDefault: true
     },
     {
-      id: '3',
-      name: '#0000FF'
+      name: '#0000FF',
+      red: 0,
+      green: 0,
+      blue: 255,
+      isDefault: true
     }
   ];
   // TODO napraw to
@@ -43,8 +55,8 @@ const App = () => {
     saveCustomColorList();
   }
 
-  const removeColor = (colorId: string) => {
-    customColors = customColors.filter(x => x.id !== colorId);
+  const removeColor = (colorName: string) => {
+    customColors = customColors.filter(x => x.name !== colorName);
     saveCustomColorList();
   }
 
