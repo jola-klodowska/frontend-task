@@ -12,6 +12,11 @@ interface Test {
 const Colors = (props: Test) => {
 
     const colors = props.colors;
+colors.sort(
+        (colorA, colorB) => colorB.red - colorA.red ||
+            colorB.green - colorA.green ||
+            colorB.blue - colorA.blue
+    )
 
     return (
         <article>
@@ -21,8 +26,8 @@ const Colors = (props: Test) => {
                     <Color
                         onColorRemove={props.onColorRemove}
                         key={shortid()}
-                        color={color.name} 
-                        isDefault={color.isDefault}/>
+                        color={color.name}
+                        isDefault={color.isDefault} />
                 )}
             </div>
         </article>
